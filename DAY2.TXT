@@ -1,0 +1,109 @@
+Realworlk
+@D1
+config t 
+vlan 11 
+name 1500 wfh
+exit
+interface vlan 11
+no shut 
+ip add 172.16.8.1 255.255.248.0
+exit
+ip dhcp excluded-add 172.16.8.1 172.16.8.100
+ip add 172.16.8.0 255.255.248.0
+DEFAULT -ROUTER 172.16.8.1
+@A1
+CONFIG T
+INT E0/0
+NO SHUT
+switchpot access vlan 11
+do sh vlan brief 
+@P1:
+config t
+int e0/0
+no shutdown 
+ip address DHCP 
+DO BP 
+
+####### d1, a2, p2
+@D1
+config t 
+vlan 6
+name 50 wfh
+exit
+interface vlan 6
+no shut 
+ip add 172.16.0.65 255.255.255.192
+exit
+ip dhcp excluded-add 172.16.0.65 172.16.0.69
+ip add 172.16.0.64 255.255.255.192
+DEFAULT -ROUTER 172.16.0.65
+@A2
+CONFIG T
+INT E0/0
+NO SHUT
+switchpot access vlan 2
+do sh vlan brief 
+@P2:
+config t
+int e1/0
+no shutdown 
+ip address DHCP 
+DO BP 
+
+###################
+
+D1, 
+vlan 14
+name Accenture
+int vlan 14
+
+D2, 
+config t
+int e1/0
+
+S2: 
+config t 
+int e1/0
+
+####### d1, a2, p2
+@D1
+config t 
+vlan 14
+name Accenture
+exit
+interface vlan 14
+no shut 
+ip add 10.0.64.1 255.255.192.0
+exit
+ip dhcp excluded-add 10.0.64.1 10.0.64.100
+ip dhcp pool accenturevlan
+NETWORK 10.0.64.0 255.255.192.0
+DEFAULT -ROUTER 10.0.64.1
+@D2
+CONFIG T
+INT e1/0
+NO SHUT
+switchpot access vlan 14
+do sh vlan brief 
+@S2:
+config t
+int e1/0
+no shutdown 
+ip address DHCP 
+DO BP 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
