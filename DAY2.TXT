@@ -91,7 +91,7 @@ int e1/0
 no shutdown 
 ip address DHCP 
 DO BP 
-
+############### new client ##############
 
 
 
